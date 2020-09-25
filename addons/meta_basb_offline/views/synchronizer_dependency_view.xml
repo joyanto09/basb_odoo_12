@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+	<!-- Branch -->
+	<record id="view_res_branch_tree" model="ir.ui.view">
+		<field name="name">res.branch.tree</field>
+		<field name="model">res.branch</field>
+		<field name="arch" type="xml">
+			<tree create="false">
+				<field name="name"/>
+				<field name="company_id"/>
+				<field name="sync_ref_id"/>
+			</tree>
+		</field>
+	</record>
+	<record id="action_res_branch" model="ir.actions.act_window">
+		<field name="name">Branch</field>
+		<field name="res_model">res.branch</field>
+		<field name="view_mode">tree</field>
+	</record>
+	<!-- <menuitem action="action_res_branch" 
+	id="menu_res_branch" 
+	parent="menu_basb_settings" 
+	sequence="90"
+	groups="base.group_erp_manager"/> -->
+
+	<!-- DASB -->
+	<record id="view_basb_dasb_tree" model="ir.ui.view">
+		<field name="name">basb.dasb.tree</field>
+		<field name="model">basb.dasb</field>
+		<field name="arch" type="xml">
+			<tree create="false">
+				<field name="name"/>
+				<field name="sync_ref_id"/>
+			</tree>
+		</field>
+	</record>
+	<record id="action_basb_dasb" model="ir.actions.act_window">
+		<field name="name">DASB</field>
+		<field name="res_model">basb.dasb</field>
+		<field name="view_mode">tree</field>
+	</record>
+	<menuitem action="action_basb_dasb" 
+	id="menu_basb_dasb" 
+	parent="meta_basb_offline.menu_basb_settings" 
+	sequence="91"
+	groups="base.group_erp_manager"/>
+
+	<!-- Rank -->
+	<record id="view_basb_rank_tree" model="ir.ui.view">
+		<field name="name">basb.rank.tree</field>
+		<field name="model">basb.rank</field>
+		<field name="arch" type="xml">
+			<tree create="false">
+				<field name="name"/>
+				<field name="sync_ref_id"/>
+			</tree>
+		</field>
+	</record>
+	<record id="action_basb_rank" model="ir.actions.act_window">
+		<field name="name">Rank</field>
+		<field name="res_model">basb.rank</field>
+		<field name="view_mode">tree</field>
+	</record>
+	<menuitem action="action_basb_rank" 
+	id="menu_basb_rank" 
+	parent="meta_basb_offline.menu_basb_settings" 
+	sequence="91"
+	groups="base.group_erp_manager"/>
+
+	<!-- Service -->
+	<record id="view_basb_service_tree" model="ir.ui.view">
+		<field name="name">basb.service.tree</field>
+		<field name="model">basb.service</field>
+		<field name="arch" type="xml">
+			<tree create="false">
+				<field name="name"/>
+				<field name="sync_ref_id"/>
+			</tree>
+		</field>
+	</record>
+	<record id="action_basb_service" model="ir.actions.act_window">
+		<field name="name">Service</field>
+		<field name="res_model">basb.service</field>
+		<field name="view_mode">tree</field>
+	</record>
+	<menuitem action="action_basb_service" 
+	id="menu_basb_service" 
+	parent="meta_basb_offline.menu_basb_settings" 
+	sequence="91"
+	groups="base.group_erp_manager"/>
+
+	<!-- District -->
+	<record id="view_basb_district_tree" model="ir.ui.view">
+		<field name="name">basb.district.tree</field>
+		<field name="model">basb.district</field>
+		<field name="arch" type="xml">
+			<tree create="false">
+				<field name="name"/>
+				<field name="sync_ref_id"/>
+			</tree>
+		</field>
+	</record>
+	<record id="action_basb_district" model="ir.actions.act_window">
+		<field name="name">District</field>
+		<field name="res_model">basb.district</field>
+		<field name="view_mode">tree</field>
+	</record>
+	<menuitem action="action_basb_district" 
+	id="menu_basb_district" 
+	parent="meta_basb_offline.menu_basb_settings" 
+	sequence="91"
+	groups="base.group_erp_manager"/>
+
+
+	<!-- Relation -->
+	<record id="view_basb_relation_tree" model="ir.ui.view">
+		<field name="name">basb.relation.tree</field>
+		<field name="model">basb.relation</field>
+		<field name="arch" type="xml">
+			<tree create="false">
+				<field name="name"/>
+				<field name="sync_ref_id"/>
+			</tree>
+		</field>
+	</record>
+	<record id="action_basb_relation" model="ir.actions.act_window">
+		<field name="name">Relation</field>
+		<field name="res_model">basb.relation</field>
+		<field name="view_mode">tree</field>
+	</record>
+	<menuitem action="action_basb_relation" 
+	id="menu_basb_relation" 
+	parent="meta_basb_offline.menu_basb_settings" 
+	sequence="92"
+	groups="base.group_erp_manager"/>
+
+
+	<!-- Stock Picking -->
+	<record id="view_picking_form_inherit" model="ir.ui.view">
+		<field name="name">stock.picking.form</field>
+		<field name="model">stock.picking</field>
+		<field name="inherit_id" ref="stock.view_picking_form"/>
+		<field name="arch" type="xml">
+			<data>
+                <xpath expr="//field[@name='date_done']" position="after">
+                    <field name="transfer_date"/>
+                </xpath>
+            </data>
+		</field>
+	</record>
+
+    </data>
+</odoo>

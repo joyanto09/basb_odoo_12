@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+    
+        <record id="synchronizer_settings_form" model="ir.ui.view">
+            <field name="name">synchronizer.configuration.form.view</field>
+            <field name="model">synchronizer.configuration</field>
+            <field name="priority" eval="7" />
+            <field name="arch" type="xml">
+                <form string="Synchronizer Configuration Form" create="true">
+                    <sheet string="Synchronizer Configuration">
+                        <h3>Synchronizer Configuration</h3>
+                        <group col="1">
+                            <!-- <group colspan="1">
+                                <field name="user_default_password"/>
+                            </group> -->
+                            <group colspan="1">
+                                <field name="base_url"/>
+                            </group>
+                        </group>
+                        <bottom>
+                            <button name="save" type="object" string="Save" class="btn btn-sm btn-primary"/>
+                        </bottom>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_synchronizer_settings" model="ir.actions.act_window">
+            <field name="name">Synchronizer Configuration</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">synchronizer.configuration</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">form</field>
+            <field name="res_id">1</field>
+            <field name="target">inline</field>
+            <field name="view_id" ref="synchronizer_settings_form"/>
+        </record>
+
+        <menuitem name="BASB"
+            id="menu_basb_settings"
+            parent="base.menu_administration"
+            sequence="1"/>
+
+        <menuitem name="Synchronizer Settings"
+            id="menu_synchronizer_settings"
+            action="action_synchronizer_settings"
+            parent="meta_basb_offline.menu_basb_settings"
+            sequence="100"/>
+
+    </data>
+</odoo>

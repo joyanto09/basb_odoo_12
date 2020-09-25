@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<template id="template" xml:space="preserve">
+
+    <t t-name="ChronicDisease">
+        <div class='control-button in_note'>
+            <i class="fa fa-tags">  Chronic Disease </i>
+        </div>
+    </t>
+    <t t-name="NotePopupWidget">
+        <div role="dialog" class="modal-dialog">
+            <div class="popup popup-textinput" style="background-color: bisque;">
+                <header class="title"><t t-esc=" widget.options.title || '' " /></header>
+                <div>
+                    <select id="note_select" style="width:461px;" class="note_temp">
+                        <option id="" value="select"></option>
+                    </select>
+                </div>
+                <br/>
+                <textarea id="note_text_area" type='text' t-att-value="widget.options.value || ''"></textarea>
+                <div class="footer">
+                    <div class="button confirm">
+                        Ok
+                    </div>
+                    <div class="button remove">
+                        Erase
+                    </div>
+                    <div class="button cancel">
+                        Cancel
+                    </div>
+                </div>
+            </div>
+        </div>
+    </t>
+
+    
+    <t t-extend="PosTicket">
+        <t t-jquery="table.receipt-orderlines" t-operation="replace">
+            <table class='receipt-orderlines'>
+                 <colgroup>
+                    <col width='75%'/>
+                    <col width='25%'/>
+                </colgroup>
+                <tr>
+                    <td class="pos-left-align">Medicine</td>
+                    <td class="pos-right-align">Quantity</td>
+                </tr>
+                <tr t-foreach="orderlines" t-as="orderline">
+                    <td>
+                        <t t-esc="orderline.get_product().display_name"/><br/>
+                        <t t-if="orderline.note">
+                            <i class="fa fa-tags"><t t-esc="orderline.note"/></i><br/>
+                        </t>
+                        <t t-if="orderline.get_discount() > 0">
+                            <div class="pos-disc-font">
+                                With a <t t-esc="orderline.get_discount()"/>% discount
+                            </div>
+                        </t>
+                    </td>
+                    <td class="pos-right-align">
+                        <t t-esc="orderline.get_quantity_str_with_unit()"/> pcs
+                    </td>
+                </tr>
+            </table>
+        </t>
+    </t>
+
+    <t t-extend="ClientDetails">
+        
+        <t t-jquery="div.client-details-left" t-operation="replace">
+            <div style="width: 50%;float: left;">
+                <div>
+                    <span class='label'><strong>Personal Number :</strong></span>
+                    <t t-if='partner.personal_number'>
+                        <span class='detail client-email'><t t-esc='partner.personal_number' /></span>
+                    </t>
+                    <t t-if='!partner.personal_number'>
+                        <span class='detail client-email empty'>N/A</span>
+                    </t>
+                </div>
+                <!-- <div>
+                    <span class='label'><strong>Address :</strong></span>
+                    <t t-if='partner.address'>
+                        <span class='detail client-address'><t t-esc='partner.address' /></span>
+                    </t>
+                    <t t-if='!partner.address'>
+                        <span class='detail client-address empty'>N/A</span>
+                    </t>
+                </div> -->
+                <div>
+                    <span class='label'><strong>Phone :</strong></span>
+                    <t t-if='partner.phone'>
+                        <span class='detail client-phone'><t t-esc='partner.phone' /></span>
+                    </t>
+                    <t t-if='!partner.phone'>
+                        <span class='detail client-phone empty'>N/A</span>
+                    </t>
+                </div>
+            </div>
+        </t>
+        <t t-jquery="div.client-details-right" t-operation="replace">
+            <div style="width: 50%;float: right;">
+                <div>
+                    <span class='label'><strong>Barcode :</strong></span>
+                    <t t-if='partner.barcode'>
+                        <span class='detail client-id'><t t-esc='partner.barcode'/></span>
+                    </t>
+                    <t t-if='!partner.barcode'>
+                        <span class='detail client-id empty'>N/A</span>
+                    </t>
+                </div>
+                <div>
+                    <span class='label'><b>Last Purchase Date :</b></span>
+                    <t t-if='partner.last_purchase_date'>
+                        <span><t t-esc='partner.last_purchase_date'/></span>
+                    </t>
+                    <t t-if='!partner.last_purchase_date'>
+                        <span>N/A</span>
+                    </t>
+                </div>
+                <div>
+                    <span class='label'><b>Last Purchase Diseases :</b></span>
+                    <t t-if='partner.last_purchase_diseases'>
+                        <span><t t-esc='partner.last_purchase_diseases'/></span>
+                    </t>
+                    <t t-if='!partner.last_purchase_diseases'>
+                        <span>N/A</span>
+                    </t>
+                </div>
+                <div>
+                    <span class='label'><strong>Beneficiary Of :</strong></span>
+                    <t t-if='partner.beneficiary_number'>
+                        <span class='detail client-email'><t t-esc='partner.beneficiary_number' /></span>
+                    </t>
+                    <t t-if='!partner.beneficiary_number'>
+                        <span class='detail client-email empty'>N/A</span>
+                    </t>
+                </div>
+            </div>
+        </t>
+        
+        <t t-jquery="div.client-details-box" t-operation="append">
+             <div style="width: 50%; float: right;">
+                <span class='label'><strong>DASB :</strong></span>
+                <t t-if='partner.dasb'>
+                    <span class='detail client-dasb'><t t-esc='partner.dasb[1]' /></span>
+                </t>
+                <t t-if='!partner.dasb'>
+                    <span>N/A</span>
+                </t>
+            </div>
+            <div>
+                <span class='label'><strong>Dependents :</strong></span>
+                <t t-if='partner.child_ids'>
+                    <ul>
+                        <t t-foreach="partner.child_ids" t-as="child">
+                            <t t-set="dependents" t-value="widget.dependent_information(child)"/>
+                            <li>
+                                <span> 
+                                    <t t-if='dependents'> 
+                                        <t t-esc='dependents.name'/> 
+                                        <t t-if='dependents.relation'> (<t t-esc='dependents.relation[1]'/>) </t>
+                                        <t t-if='dependents.barcode'> - <t t-esc='dependents.barcode'/> </t>
+                                    </t>
+                                </span>
+                            </li>
+                        </t>
+                    </ul>
+                </t>
+            </div>
+        </t>
+    </t>
+
+    <t t-name="CustomErrorPopupWidget">
+        <div role="dialog" class="modal-dialog">
+            <div class="popup popup-error">
+                <p class="title"><t t-esc=" widget.options.title || 'Error' " /></p>
+                <p class="body"><t t-esc=" widget.options.body || '' "/></p>
+                <div class="footer">
+                    <div class="button cancel">
+                        Ok
+                    </div>
+                </div>
+            </div>
+        </div>
+    </t>
+        
+
+</template>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record model="ir.ui.menu" id="point_of_sale.menu_point_root">
+            <field name='name'>Dispensary</field>
+        </record>
+        <record model="ir.ui.menu" id="point_of_sale.menu_point_of_sale">
+            <field name='name'>Distribution Records</field>
+        </record>
+        
+        <record model="ir.ui.menu" id="point_of_sale.pos_config_menu_catalog">
+            <field name='name'>Medicine</field>
+        </record>
+        <record model="ir.ui.menu" id="point_of_sale.menu_pos_products">
+            <field name='name'>Medicine</field>
+        </record>
+
+        <!-- <template id="template_inherit" inherit_id="point_of_sale.lientDetails">
+            <xpath expr="//section[@class='client-details']//div[@class='client-details-box']//div[@class='client-details-left']//div[@class='client-details-left']//div[2]" position="attributes">
+                <attribute name="class">hidden</attribute>
+            </xpath>
+        </template> -->
+    </data>
+</odoo>

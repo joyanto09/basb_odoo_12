@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data noupdate="1">
+
+        <record model="synchronizer.configuration" id="synchronizer_configuration_settings">
+            <field name="name">Synchronizer Settings</field>
+            <field name="user_default_password">123456</field>
+            <field name="base_url">http://127.0.0.1:8069</field>
+        </record>
+        
+    </data>
+</odoo>

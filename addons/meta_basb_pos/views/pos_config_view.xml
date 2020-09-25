@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="pos_config_view_form_ext" model="ir.ui.view">
+        <field name="name">pos.config.form.view</field>
+        <field name="model">pos.config</field>
+        <field name="inherit_id" ref="point_of_sale.pos_config_view_form"/>
+        <field name="arch" type="xml">
+            <data>
+                <xpath expr="//div[@id='inventory_location']" position="after">
+                    <h2>POS</h2>
+                    <div class="row mt16 o_settings_container" id="basb_config">
+                        <div class="col-12 col-lg-6 o_setting_box">
+                            <div class="o_setting_right_pane">
+                                <label for="day_limit" string="Day Limit"/>
+                                <div>
+                                    <field name="day_limit" placeholder="Day Limit"/>
+                                </div>
+                                <div>
+                                     <button name="apply_day_limit_to_all_session" string="Apply Day Limit to All Sessions" type="object" icon="fa-check-square"/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-lg-6 o_setting_box">
+                            <div class="o_setting_right_pane">
+                                <label for="dasb_id" string="DASB"/>
+                                <div>
+                                    <field name="dasb_id" placeholder="DASB"/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </xpath>
+            </data>
+        </field>
+    </record>
+
+</odoo>

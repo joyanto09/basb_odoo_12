@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+
+        <record id="action_synchronizer_wizard_form" model="ir.ui.view">
+            <field name="name">synchronizer.wizard.form</field>
+            <field name="model">synchronizer.wizard</field>
+            <field name="arch" type="xml">
+                <form string="Synchronizer Wizard Form" version="7.0">
+                    <group col="4" name="synchronizer_wizard">
+                        <group>
+                            <field name="sync_type" widget="radio" options="{'horizontal': true}"></field>
+                        </group>
+                    </group>
+                    <group col="2" attrs="{'invisible':[('sync_type','!=','stock')]}">
+                        <group>
+                            <field name="dispensary" attrs="{'required': [('sync_type','=','stock')]}"  widget="selection"/>
+                            <field name="year" attrs="{'required': [('sync_type','=','stock')]}"/>
+                            <field name="quarter" attrs="{'required': [('sync_type','=','stock')]}"/>
+                        </group>
+                    </group>
+                    <footer>
+                        <button name="sync" type="object" string="Apply" class="btn btn-sm btn-primary"/>
+                        <button string="Cancel" class="oe_link" special="cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_synchronizer_wizard" model="ir.actions.act_window">
+            <field name="name">Synchronizer Filter Wizard</field>
+            <field name="res_model">synchronizer.wizard</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+        </record>
+
+        <menuitem name="Online Synchronizer"
+            action="action_synchronizer_wizard"
+            id="menu_synchronizer_wizard"
+            parent="meta_basb_offline.menu_basb_settings"
+            sequence="99"/>
+
+
+        <record id="action_inventory_synchronizer_wizard_form" model="ir.ui.view">
+            <field name="name">inventory.synchronizer.wizard.form</field>
+            <field name="model">inventory.synchronizer.wizard</field>
+            <field name="arch" type="xml">
+                <form string="Inventory Synchronizer Wizard Form" version="7.0">
+                    <group col="4" name="synchronizer_wizard">
+                        <group>
+                            <field name="sync_type" widget="radio" options="{'horizontal': true}"></field>
+                        </group>
+                    </group>
+                    <group col="2">
+                        <group>
+                            <field name="dispensary" widget="selection"/>
+                            <field name="year"/>
+                            <field name="quarter"/>
+                        </group>
+                    </group>
+                    <footer>
+                        <button name="sync" type="object" string="Apply" class="btn btn-sm btn-primary"/>
+                        <button string="Cancel" class="oe_link" special="cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_inventory_synchronizer_wizard" model="ir.actions.act_window">
+            <field name="name">Inventory Synchronizer Filter Wizard</field>
+            <field name="res_model">inventory.synchronizer.wizard</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+        </record>
+
+        <menuitem name="Sync Requisitions"
+            id="menu_sync_requisitions"
+            action="action_inventory_synchronizer_wizard"
+            parent="stock.menu_stock_root"
+            sequence="101"/>
+
+    </data>
+</odoo>

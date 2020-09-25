@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<odoo>
+    <data>
+        <!-- Action -->
+
+        <!-- Menu -->
+        <menuitem id="basb_menu_configuration" name="Configurations"/>
+        <menuitem id="basb_menu_pharmacy_label" name="Dispensaries" parent="basb_menu_configuration"/>
+        <menuitem id="basb_menu_pharmacy" name="Pharmacy" parent="basb_menu_pharmacy_label" action="point_of_sale.action_pos_config_pos" sequence='1'/>
+        <!-- <menuitem id="basb_menu_pharmacy_settings" name="Pharmacy Settings" parent="basb_menu_pharmacy_label" action="point_of_sale.action_pos_configuration" sequence='2'/>
+        <menuitem id="basb_menu_pharmacy_categories" name="Pharmacy Categories" parent="basb_menu_pharmacy_label" action="point_of_sale.product_pos_category_action" sequence='3'/> -->
+        <menuitem id="basb_menu_beneficiaries" name="Beneficiaries" parent="basb_menu_configuration"/>
+        <menuitem id="basb_menu_diseases" name="Chronic Diseases" parent="basb_menu_beneficiaries" action="base.action_partner_category_form" sequence='1'/>
+        <!-- <menuitem id="basb_menu_beneficiaries_rank" name="Beneficiaries Rank" parent="basb_menu_beneficiaries" action="meta_basb_contacts.action_partner_rank_form" sequence='2'/>
+        <menuitem id="basb_menu_district" name="District" parent="basb_menu_beneficiaries" action="meta_basb_contacts.action_partner_district_form" sequence='3'/>
+        <menuitem id="basb_menu_basb_offices" name="BASB Offices" parent="basb_menu_beneficiaries" action="meta_basb_contacts.action_partner_basb_office_form" sequence='4'/> -->
+    
+
+        <!-- Hide Menus -->
+
+        <record model="res.groups" id="group_invisible">
+            <field name="name">Hidden items</field>
+        </record>
+
+        <record id="contacts.res_partner_menu_contacts" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6, False, [ref('meta_menu_basb.group_invisible')])]"/>
+        </record>
+
+        <record id="contacts.res_partner_menu_config" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6, False, [ref('meta_menu_basb.group_invisible')])]"/>
+        </record>
+
+        <record id="contacts.menu_partner_title_contact" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6, False, [ref('meta_menu_basb.group_invisible')])]"/>
+        </record>
+
+        <record id="contacts.res_partner_industry_menu" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6, False, [ref('meta_menu_basb.group_invisible')])]"/>
+        </record>
+
+        <!-- <record id="calendar.mail_menu_calendar" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6, False, [ref('meta_menu_basb.group_invisible')])]"/>
+        </record> -->
+
+        <record id="contacts.menu_localisation" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6, False, [ref('meta_menu_basb.group_invisible')])]"/>
+        </record>
+
+        <record id="contacts.menu_config_bank_accounts" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6, False, [ref('meta_menu_basb.group_invisible')])]"/>
+        </record>
+
+        <!-- <record id="crm.crm_menu_root" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6, False, [ref('meta_menu_basb.group_invisible')])]"/>
+        </record> -->
+
+        <record id="website.menu_website_configuration" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6, False, [ref('meta_menu_basb.group_invisible')])]"/>
+        </record>
+
+        <!-- <record id="utm.menu_link_tracker_root" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6, False, [ref('meta_menu_basb.group_invisible')])]"/>
+        </record> -->
+
+        <record id="mail.menu_root_discuss" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6, False, [ref('meta_menu_basb.group_invisible')])]"/>
+        </record>
+
+        <record id="point_of_sale.menu_point_of_sale_customer" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6, False, [ref('meta_menu_basb.group_invisible')])]"/>
+        </record>
+
+        <record id="point_of_sale.pos_config_menu_action_product_product" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6, False, [ref('meta_menu_basb.group_invisible')])]"/>
+        </record>
+
+        <record id="point_of_sale.menu_report_order_details" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6, False, [ref('meta_menu_basb.group_invisible')])]"/>
+        </record>
+
+        <record id="point_of_sale.menu_point_config_product" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6, False, [ref('meta_menu_basb.group_invisible')])]"/>
+        </record>
+
+        <record id="stock.stock_picking_type_menu" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6, False, [ref('meta_menu_basb.group_invisible')])]"/>
+        </record>
+
+        <record id="stock.menu_stock_scrap" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6, False, [ref('meta_menu_basb.group_invisible')])]"/>
+        </record>
+
+        <record id="stock.menu_procurement_compute" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6, False, [ref('meta_menu_basb.group_invisible')])]"/>
+        </record>
+
+        <record id="stock.product_product_menu" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6, False, [ref('meta_menu_basb.group_invisible')])]"/>
+        </record>
+
+        <!-- <record id="stock.stock.menu_reordering_rules_config" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6, False, [ref('meta_menu_basb.group_invisible')])]"/>
+        </record> -->
+
+        <record id="stock_account.menu_valuation" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6, False, [ref('meta_menu_basb.group_invisible')])]"/>
+        </record>
+
+        <record id="stock.stock_move_menu" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6, False, [ref('meta_menu_basb.group_invisible')])]"/>
+        </record>
+
+        <record id="stock.stock_move_line_menu" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6, False, [ref('meta_menu_basb.group_invisible')])]"/>
+        </record>
+
+        <record id="stock.menu_product_in_config_stock" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6, False, [ref('meta_menu_basb.group_invisible')])]"/>
+        </record>
+
+        <record id="stock.product_uom_menu" model="ir.ui.menu">
+            <field name="groups_id" eval="[(6, False, [ref('meta_menu_basb.group_invisible')])]"/>
+        </record>
+
+    </data>
+</odoo>

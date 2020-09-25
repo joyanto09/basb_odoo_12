@@ -1,0 +1,62 @@
+<?xml version="1.0"?>
+<odoo>
+    <record id="view_product_for_basb_info" model="ir.ui.view">
+        <field name="name">view.product.template.basb.info</field>
+        <field name="model">product.template</field>
+        <field name="inherit_id" ref="product.product_template_only_form_view" />
+        <field name="arch" type="xml">
+            <data>
+
+                <xpath expr="//field[@name='name']" position="attributes">
+                    <attribute name="placeholder"> Medicine Name </attribute>
+                    <attribute name="string">Medicine Name</attribute>
+                </xpath>
+                <xpath expr="//field[@name='default_code']" position="attributes">
+                    <attribute name="placeholder"> Medicine Code </attribute>
+                    <attribute name="string">Medicine Code</attribute>
+                </xpath>
+                <xpath expr="//field[@name='barcode']" position="before">
+                    <field name="generic_code" placeholder="Generic Code"/>
+                </xpath>
+            </data>
+        </field>
+    </record>
+
+    <record id="view_product_category_for_basb_info" model="ir.ui.view">
+        <field name="name">view.product.category.basb.info</field>
+        <field name="model">product.category</field>
+        <field name="inherit_id" ref="product.product_category_form_view" />
+        <field name="arch" type="xml">
+            <data>
+                <xpath expr="//field[@name='parent_id']" position="after">
+                    <field name="critical_product_categories"/>
+                </xpath>
+            </data>
+        </field>
+    </record>
+
+    <!-- <record id="action_pos_location_stock_filter" model="ir.actions.server">
+        <field name="name">Stock</field>
+        <field name="condition">True</field>
+        <field name="type">ir.actions.server</field>
+        <field name="model_id" ref="model_stock_quant" />
+        <field name="state">code</field>
+        <field name="code">action = model.pos_location_stock_filter()</field>
+    </record>
+
+    <menuitem id="basb_stocks" name="Stocks" action="action_pos_location_stock_filter" sequence='100'/> -->
+    <menuitem id="basb_stocks" name="Stocks" action="stock.quantsact" sequence='100'/>
+
+    <record id="action_pos_location_critical_stock_filter" model="ir.actions.server">
+        <field name="name">Critical Stock</field>
+        <field name="condition">True</field>
+        <field name="type">ir.actions.server</field>
+        <field name="model_id" ref="model_stock_quant" />
+        <field name="state">code</field>
+        <field name="code">action = model.pos_location_critical_stock_filter()</field>
+    </record>
+
+    <menuitem id="basb_critical_stocks" name="Critical Stocks" action="action_pos_location_critical_stock_filter" sequence='100'/>
+
+    <menuitem id="basb_users" name="Users" action="base.action_res_users" sequence='101'/>
+</odoo>

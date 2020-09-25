@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="0">
+
+        <!-- Dashboard Menu Filter -->
+        <record model="ir.rule" id="dashboard_rule_for_pos_manager">
+            <field name="name">Dashboard POS Manager Rule</field>
+            <field name="model_id" ref="model_basb_dashboard_menu"/>
+            <field name="global" eval="False"/>
+            <field name="domain_force">[]</field>
+            <field name="groups" eval="[(4, ref('point_of_sale.group_pos_manager'))]"/>
+        </record>
+
+        <record model="ir.rule" id="dashboard_rule_for_pos_user">
+            <field name="name">Dashboard POS Manager Rule</field>
+            <field name="model_id" ref="model_basb_dashboard_menu"/>
+            <field name="global" eval="False"/>
+            <field name="domain_force">[('name','in',['pos_medical_dispensary', 'basb_stock', 'basb_critical_stock'])]</field>
+            <field name="groups" eval="[(4, ref('point_of_sale.group_pos_user'))]"/>
+        </record>
+
+        <!-- for home menu -->
+        <record model="basb.dashboard.menu" id="contacts_beneficiary">
+            <field name="name">contacts_beneficiary</field>
+            <field name="header">Beneficiaries</field>
+            <field name="action">meta_basb_contacts.action_contacts_customer</field>
+            <field name="menu">contacts.menu_contacts</field>
+            <field name="model">res.partner</field>
+            <field name="view">kanban</field>
+        </record>
+
+        <record model="basb.dashboard.menu" id="configuration_basb">
+            <field name="name">configuration_basb</field>
+            <field name="header">Configuration</field>
+            <field name="action">point_of_sale.action_pos_config_pos</field>
+            <field name="menu">meta_menu_basb.basb_menu_configuration</field>
+            <field name="model">pos.config</field>
+            <field name="view">list</field>
+        </record>
+
+        <record model="basb.dashboard.menu" id="basb_users">
+            <field name="name">basb_users</field>
+            <field name="header">Users</field>
+            <field name="action">base.action_res_users</field>
+            <field name="menu">meta_basb_pos.basb_users</field>
+            <field name="model">res.users</field>
+            <field name="view">list</field>
+        </record>
+
+        <record model="basb.dashboard.menu" id="pos_medical_dispensary">
+            <field name="name">pos_medical_dispensary</field>
+            <field name="header">Dispensary</field>
+            <field name="action">point_of_sale.action_pos_config_kanban</field>
+            <field name="menu">point_of_sale.menu_point_root</field>
+            <field name="model">pos.config</field>
+            <field name="view">kanban</field>
+        </record>
+
+        <record model="basb.dashboard.menu" id="basb_stock">
+            <field name="name">basb_stock</field>
+            <field name="header">Stock</field>
+            <!-- <field name="action">meta_basb_pos.action_pos_location_stock_filter</field> -->
+            <field name="action">stock.quantsact</field> <!-- brought the default inventory report -->
+            <field name="menu">meta_basb_pos.basb_stocks</field>
+            <field name="model">stock.quant</field>
+            <field name="view">list</field>
+        </record>
+
+        <record model="basb.dashboard.menu" id="basb_critical_stock">
+            <field name="name">basb_critical_stock</field>
+            <field name="header">Critical Stock</field>
+            <field name="action">meta_basb_pos.action_pos_location_critical_stock_filter</field>
+            <field name="menu">meta_basb_pos.basb_critical_stocks</field>
+            <field name="model">stock.quant</field>
+            <field name="view">list</field>
+        </record>
+
+        <!-- Access to menu hide -->
+        <!-- contacts -->
+        <!-- <record model="ir.ui.menu" id="contacts.res_partner_menu_contacts">
+            <field name="groups_id" eval="[(4, ref('base.group_erp_manager')), (4, ref('base.group_system'))]"/>
+        </record> -->
+
+        <!-- Point Of Sale / Customer -->
+        <!-- <record model="ir.ui.menu" id="point_of_sale.menu_point_of_sale_customer">
+            <field name="groups_id" eval="[(4, ref('base.group_erp_manager')), (4, ref('base.group_system'))]"/>
+        </record> -->
+        
+        <!-- Point Of Sale / Product Variant -->
+        <!-- <record model="ir.ui.menu" id="point_of_sale.pos_menu_products_configuration">
+            <field name="groups_id" eval="[(4, ref('base.group_erp_manager')), (4, ref('base.group_system'))]"/>
+        </record> -->
+
+        <record model="ir.model.access" id="access_for_basb_dashboard">
+            <field name="name">access_for_basb_dashboard</field>
+            <field name="group_id" eval="ref('base.group_partner_manager')"/>
+            <field name="model_id" eval="ref('meta_menu_basb.model_basb_dashboard_menu')"/>
+            <field name="perm_read" eval="True"/>
+            <field name="perm_create" eval="True"/>
+            <field name="perm_write" eval="True"/>
+            <field name="perm_unlink" eval="True"/>
+        </record>
+
+    </data>
+</odoo>
+

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_res_partner_filter_inherited" model="ir.ui.view">
+        <field name="name">res.partner.select</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_res_partner_filter"/>
+        <field name="arch" type="xml">
+        <data>
+            <xpath expr="//filter[@name='filter_my_partners']" position="attributes">            
+                <attribute name="invisible">1</attribute>        
+            </xpath>
+            <xpath expr="//filter[@name='type_person']" position="attributes">            
+                <attribute name="invisible">1</attribute>        
+            </xpath>
+            <xpath expr="//filter[@name='type_company']" position="attributes">            
+                <attribute name="invisible">1</attribute>        
+            </xpath>
+            <xpath expr="//filter[@name='customer']" position="replace">            
+                <filter string="Beneficiaries" name="customer" domain="[('customer','=',True), ('parent_id', '=', False)]"/>      
+            </xpath>
+            <xpath expr="//filter[@name='supplier']" position="attributes">            
+                <attribute name="invisible">1</attribute>        
+            </xpath>
+            <xpath expr="//filter[@name='inactive']" position="attributes">            
+                <attribute name="invisible">1</attribute>        
+            </xpath>
+            <xpath expr="//filter[@name='salesperson']" position="replace">            
+                <filter name="salesperson" string="Users" domain="[]" context="{'group_by' : 'user_id'}"/>
+            </xpath>
+        </data>
+        </field>
+    </record>
+</odoo>

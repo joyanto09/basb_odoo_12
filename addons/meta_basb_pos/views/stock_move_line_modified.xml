@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="stock.stock_move_line_action" model="ir.actions.act_window">
+        <field name="view_mode">pivot,tree,kanban,form</field>
+        <field name="view_id" ref=""/>
+    </record>
+    <record id="stock.quantsact" model="ir.actions.act_window">
+        <field name="view_mode">pivot,tree,form,graph</field>
+    </record>
+</odoo>

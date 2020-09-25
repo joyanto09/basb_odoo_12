@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="view_partner_form_inherited" model="ir.ui.view">
+            <field name="name">res.partner.form.inherited</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_partner_form"/>
+            <field name="priority" eval="1"/>
+            <field name="arch" type="xml">
+                <xpath expr="//button[@name='toggle_active']" position="attributes">            
+                    <attribute name="invisible">1</attribute>        
+                </xpath>
+            </field>
+        </record>
+        <record id="partner_view_buttons_inherited" model="ir.ui.view">
+            <field name="name">partner.view.buttons.inherited</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="account.partner_view_buttons"/>
+            <field name="priority" eval="13"/>
+            <field name="arch" type="xml">
+                <xpath expr="//button[@name='action_view_partner_invoices']" position="attributes">            
+                    <attribute name="invisible">1</attribute>        
+                </xpath>
+            </field>
+        </record>
+        <record id="partner_view_button_contracts_count_inherited" model="ir.ui.view">
+            <field name="name">partner.view.button.contacts_count.inherited</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="account.partner_view_button_contracts_count"/>
+            <field name="priority" eval="2"/>
+            <field name="arch" type="xml">
+                <xpath expr="//button[@name='%(account.action_open_partner_analytic_accounts)d']" position="attributes">
+                    <attribute name="invisible">1</attribute>        
+                </xpath>
+            </field>
+        </record>
+        <!-- <record id="partner_view_button_contracts_pos_sales_inherited" model="ir.ui.view">
+            <field name="name">partner.view.button.pos.sales.inherited</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="point_of_sale.view_partner_property_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='pos_order_count']" position="attributes">
+                    <attribute name="string">Summary</attribute>        
+                </xpath>
+            </field>
+        </record> -->
+    </data>
+</odoo>

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+
+        <template id="popup_template" inherit_id="point_of_sale.assets">
+            <xpath expr="." position="inside">
+                <script type="text/javascript" src="/meta_basb_otp/static/src/js/popup.js"/>
+            </xpath>
+        </template>       
+
+        <record id="create_popup_form" model="ir.ui.view">
+            <field name="name">Pop up</field>
+            <field name="model">pos.popup</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form string="Pop up">
+                    <group>
+                        <field name="pin"/>
+                    </group>
+                </form>
+            </field>
+        </record>
+
+        <record id="create_popup_action" model="ir.actions.act_window" >
+            <field name="name">Pop up</field>
+            <field name="res_model">pos.popup</field>
+            <field name="view_mode">form</field>
+        </record>
+
+    </data>
+</odoo>

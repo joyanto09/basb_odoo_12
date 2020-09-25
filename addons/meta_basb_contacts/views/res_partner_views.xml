@@ -1,0 +1,222 @@
+<?xml version="1.0"?>
+<odoo>
+    
+    <!-- Partner Form View from base -->
+    <record id="view_partners_for_basb_info" model="ir.ui.view">
+        <field name="name">view.res.partner.basb.info</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_form" />
+        <field name="arch" type="xml">
+            <data>
+                <!-- <xpath expr="//field[@name='image']" position="attributes">
+                    <attribute name="attrs">{'invisible': True}</attribute>
+                </xpath> -->
+                <xpath expr="//field[@name='website']" position="attributes">
+                    <attribute name="attrs">{'invisible': True}</attribute>
+                </xpath>
+                <xpath expr="//field[@name='lang']" position="attributes">
+                    <attribute name="attrs">{'invisible': True}</attribute>
+                </xpath>
+                <xpath expr="//field[@name='title']" position="attributes">
+                    <attribute name="attrs">{'invisible': True}</attribute>
+                </xpath>
+                <xpath expr="//field[@name='category_id']" position="attributes">
+                    <attribute name="attrs">{'invisible': True}</attribute>
+                </xpath>
+                <xpath expr="//field[@name='vat']" position="attributes">
+                    <attribute name="attrs">{'invisible': True}</attribute>
+                </xpath>
+                <xpath expr="//field[@name='company_type']" position="attributes">
+                    <attribute name="attrs">{'invisible': True}</attribute>
+                </xpath>
+                <xpath expr="//field[@name='parent_id']" position="attributes">
+
+                    <attribute name="placeholder"> Your Dependent </attribute>
+                </xpath>
+
+                <xpath expr="//field[@name='vat']" position="before">
+                    <field name="permanent_address" placeholder="Permanent Address" />
+                    <field name="date_of_birth" attrs="{'invisible': [('parent_id','=', False)]}" />
+                    <!-- <field name="date_of_birth"/> -->
+                    <field name="relation" placeholder="Relation" attrs="{'invisible': [('parent_id','=', False)]}"/>
+                    <field name="special_child" attrs="{'invisible': [('relation','not in',['son','daughter'])]}" />
+                    <field name="barcode" placeholder="Barcode" />
+                </xpath>
+                <xpath expr="//field[@name='vat']" position="after">
+                    <field name="living_status"/>
+                    <field name="gander_status"/>
+                    <field name="age"/><!--my work-->
+                    <field name="beneficiary_number" attrs="{'invisible': [('parent_id','=', False)]}"/>
+                </xpath>
+
+                <xpath expr="//field[@name='function']" position="replace">
+                    <field name="personal_number" placeholder="Personal Number"/>
+                    <field name="rank_id"/>
+                    <field name="service"/>
+                    <field name="date_of_joining" options="{'format': 'dd MMM yyyy'}"/>
+                    <field name="date_of_retirement"/>
+                    <field name="blood_group" string="Blood Group"/>
+                    <field name="dasb"/>
+                </xpath>
+
+                <xpath expr="//field[@name='child_ids']//form//sheet//group//field[@name='title']" position="after">
+                    <field name="relation" placeholder="Relation" />
+                    <field name="special_child" attrs="{'invisible': [('relation','not in',['son','daughter'])]}"/>
+                    <field name="date_of_birth"/>
+                    <field name="national_identification"/>
+                    <field name="barcode" placeholder="Barcode" />
+                    <field name="permanent_address" placeholder="Permanent Address" />
+                    <field name="category_id" string="Chronic Disease" widget='many2many_tags'/>
+                </xpath>
+
+                <xpath expr="//field[@name='child_ids']//form//sheet//group//field[@name='mobile']" position="after">
+                    <field name="living_status"/>
+                </xpath>
+
+                <xpath expr="//field[@name='child_ids']//form//sheet//group//field[@name='function']" position="attributes">
+                    <attribute name="string">Occupation</attribute>
+                </xpath>
+                <xpath expr="//field[@name='child_ids']//form//sheet//field[@name='type']" position="attributes">
+                    <attribute name="attrs">{'invisible': True}</attribute>
+                </xpath>
+
+                <!-- my work -->
+                <!-- <xpath expr="//field[@name='date_of_birth']" position="after">
+                    <field name="age"/>
+                </xpath> -->
+                <!---->
+
+                <xpath expr="//field[@name='child_ids']//kanban//templates//div//field[@name='name']" position="after">
+                    <div name="relation">
+                        <field name="relation"/>
+                    </div>
+                </xpath>
+
+                <page name="internal_notes" position="before">
+                    <page string="Allow Special purchase" groups="base.group_system">
+                        <form>
+                            <sheet>
+                            <group>
+                                <group>
+                                    <h3>Allow Special Purchase</h3>
+                                    <field name='special_access_for_purchase' string="Allow"/>
+                                    <field name='password_invisible' invisible='1'/>
+                                    <field name='user_password' password="True" string="Re-Enter Your Password" attrs="{'invisible':[('password_invisible','=',False)]}"/>
+                                </group>
+                            </group>
+                            <button name="allow_special_purchase" string="Allow" type="object" icon="fa-check-square" attrs="{'invisible':[('password_invisible','=',False)]}"/>
+                            </sheet>
+                        </form>
+                    </page>
+                </page>
+
+                <page name="internal_notes" position="attributes">
+                    <attribute name="attrs">{'invisible': True}</attribute>
+                </page>
+                <page name="sales_purchases" position="attributes">
+                    <attribute name="attrs">{'invisible': True}</attribute>
+                </page>
+                <page name="accounting" position="attributes">
+                    <attribute name="attrs">{'invisible': True}</attribute>
+                </page>
+                <xpath expr="//page[1]" position="attributes">
+                    <attribute name="string">Dependents</attribute>
+                </xpath>
+                
+            </data>
+        </field>
+    </record>
+
+
+    <!-- Partner Form View From Mail -->
+    <record id="view_partners_for_basb_info1" model="ir.ui.view">
+        <field name="name">view.res.partner.basb.info</field>
+        <field name="model">res.partner</field>
+        <field name="priority" eval="1"/>
+        <field name="inherit_id" ref="mail.res_partner_view_form_inherit_mail" />
+        <field name="arch" type="xml">
+            <data>
+                <xpath expr="//field[@name='email']" position="attributes">
+                    <attribute name="attrs">{'invisible': True}</attribute>
+                </xpath>
+                <xpath expr="//label[@for='email']" position="attributes">
+                    <attribute name="attrs">{'invisible': True}</attribute>
+                </xpath>
+            </data>
+        </field>
+    </record>
+
+    <!-- Partner Search view -->
+    <record id="view_partners_for_basb_info_search" model="ir.ui.view">
+        <field name="name">res.partner.search</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_res_partner_filter"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='name']" position="before">
+                <field name="personal_number"/>
+                <field name="barcode"/>
+                <field name="national_identification"/>
+            </xpath>
+        </field>
+    </record>
+
+    <!-- <record model="ir.ui.menu" id="contacts.menu_partner_category_form">
+        <field name='name'>Diseases</field>
+    </record> -->
+    <record model="ir.ui.menu" id="contacts.menu_contacts">
+        <field name='name'>Beneficiaries</field>
+    </record>
+    <!-- <record model="ir.ui.menu" id="contacts.res_partner_menu_contacts">
+        <field name='name'>Contacts</field>
+    </record> -->
+
+    <!-- Partner Tree View from base -->
+    <record id="view_partners_tree_inherit" model="ir.ui.view">
+        <field name="name">res.partner.inherit</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_tree" />
+        <field name="arch" type="xml">
+            <data>
+                <xpath expr="//tree" position="replace">
+                    <tree string="Contacts">
+                        <field name="display_name" string="Name"/>
+                        <field name="phone"/>
+                        <field name="relation"/>
+                        <field name="parent_id" string="Beneficiary"/>
+                        <field name="dasb"/>
+                        <field name="living_status"/>
+                        <field name="sync_ref_id" invisible="1"/>
+                    </tree>
+                </xpath>
+            </data>
+        </field>
+    </record>
+
+    <record id="res_partner_kanban_view_inherit" model="ir.ui.view">
+        <field name="name">res.partner.kanban.inherit</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.res_partner_kanban_view"/>
+        <field name="arch" type="xml">
+            <data>
+                <xpath expr="//div[hasclass('oe_kanban_details')]" position="replace">
+                    <div class="oe_kanban_details">
+                        <strong class="o_kanban_record_title oe_partner_heading"><field name="display_name"/></strong>
+                        <div class="o_kanban_tags_section oe_kanban_partner_categories"/>
+                        <ul>
+                            <li t-if="record.parent_id.raw_value and !record.function.raw_value"><field name="parent_id"/></li>
+                            <li t-if="record.parent_id.raw_value">Beneficiary : <field name="parent_id"/></li>
+                            <li t-if="record.parent_id.raw_value">Relation : <field name="relation"/></li>
+                            <li t-if="record.parent_id.raw_value">DASB : <field name="dasb"/></li>
+                            <li t-if="!record.parent_id.raw_value">Personal Number : <field name="personal_number"/></li>
+                            <li t-if="!record.parent_id.raw_value">Service : <field name="service"/></li>
+                            <li t-if="!record.parent_id.raw_value">Rank : <field name="rank_id"/></li>
+                            <li t-if="!record.parent_id.raw_value">DASB : <field name="dasb"/></li>
+                        </ul>
+                        <div class="oe_kanban_partner_links"/>
+                    </div>
+                </xpath>
+            </data>
+        </field>
+    </record>
+
+</odoo>

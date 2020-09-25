@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="pos_config_view_form_inherited" model="ir.ui.view">
+            <field name="name">pos.config.form.view.inherited</field>
+            <field name="model">pos.config</field>
+            <field name="inherit_id" ref="point_of_sale.pos_config_view_form"/>
+            <field name="priority" eval="1"/>
+            <field name="arch" type="xml">
+                <xpath expr="//div[@class='row mt16 o_settings_container'][1]" position="attributes">            
+                    <attribute name="invisible">1</attribute>        
+                </xpath>
+                <xpath expr="//form//sheet//h2[1]" position="attributes">            
+                    <attribute name="invisible">1</attribute>        
+                </xpath>
+                <xpath expr="//div[@class='row mt16 o_settings_container'][2]" position="attributes">            
+                    <attribute name="invisible">1</attribute>        
+                </xpath>
+                <xpath expr="//form//sheet//h2[2]" position="attributes">            
+                    <attribute name="invisible">1</attribute>        
+                </xpath>
+                <xpath expr="//div[@class='row mt16 o_settings_container'][3]" position="attributes">            
+                    <attribute name="invisible">1</attribute>        
+                </xpath>
+                <xpath expr="//form//sheet//h2[3]" position="attributes">            
+                    <attribute name="invisible">1</attribute>        
+                </xpath>
+                <xpath expr="//div[@class='row mt16 o_settings_container'][4]" position="attributes">            
+                    <attribute name="invisible">1</attribute>        
+                </xpath>
+                <xpath expr="//form//sheet//h2[4]" position="attributes">            
+                    <attribute name="invisible">1</attribute>        
+                </xpath>
+                <xpath expr="//div[@class='row mt16 o_settings_container'][5]" position="attributes">            
+                    <attribute name="invisible">1</attribute>        
+                </xpath>
+                <!-- <xpath expr="//form//sheet//h2[5]" position="attributes">            
+                    <attribute name="invisible">1</attribute>        
+                </xpath>
+                <xpath expr="//div[@class='row mt16 o_settings_container'][6]" position="attributes">            
+                    <attribute name="invisible">1</attribute>        
+                </xpath>
+                <xpath expr="//form//sheet//h2[6]" position="attributes">            
+                    <attribute name="invisible">1</attribute>        
+                </xpath>
+                <xpath expr="//div[@class='row mt16 o_settings_container'][7]" position="attributes">            
+                    <attribute name="invisible">1</attribute>        
+                </xpath> -->
+                <xpath expr="//form//sheet//h2[8]" position="attributes">            
+                    <attribute name="invisible">1</attribute>        
+                </xpath>
+                <xpath expr="//div[@class='row mt16 o_settings_container'][9]" position="attributes">            
+                    <attribute name="invisible">1</attribute>        
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

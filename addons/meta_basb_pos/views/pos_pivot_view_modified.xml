@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="point_of_sale.action_report_pos_order_all" model="ir.actions.act_window">
+        <field name="view_mode">pivot,graph</field>
+        <field name="context">{'search_default_groupby_pos': 1}</field>
+    </record>
+</odoo>

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="action_contacts_customer" model="ir.actions.act_window">
+        <field name="name">Beneficiaries</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">res.partner</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">kanban,tree,form,activity</field>
+        <field name="search_view_id" ref="base.view_res_partner_filter"/>
+        <field name="domain">[('customer','=',True),('type','=',False)]</field>
+        <field name="help" type="html">
+          <p class="o_view_nocontent_smiling_face">
+            Create a contact in your address book
+          </p><p>
+            Odoo helps you to easily track all activities related to a customer.
+          </p>
+        </field>
+    </record>
+    <menuitem id="res_partner_menu_contacts_customer"
+        name="Beneficiaries"
+        action="action_contacts_customer"
+        parent="contacts.menu_contacts"
+        sequence="1"/>
+
+    <record id="action_contacts_dependent" model="ir.actions.act_window">
+        <field name="name">Dependents</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">res.partner</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">kanban,tree,form,activity</field>
+        <field name="search_view_id" ref="base.view_res_partner_filter"/>
+        <field name="domain">[('customer','=',True),('type','=','contact')]</field>
+        <field name="help" type="html">
+          <p class="o_view_nocontent_smiling_face">
+            Create a contact in your address book
+          </p><p>
+            Odoo helps you to easily track all activities related to a customer.
+          </p>
+        </field>
+    </record>
+    <menuitem id="res_partner_menu_contacts_dependent"
+        name="Dependents"
+        action="action_contacts_dependent"
+        parent="contacts.menu_contacts"
+        sequence="1"/>
+
+</odoo>

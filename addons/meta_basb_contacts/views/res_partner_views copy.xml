@@ -1,0 +1,75 @@
+<?xml version="1.0"?>
+<odoo>
+    <record id="view_partners_for_basb_info" model="ir.ui.view">
+        <field name="name">view.res.partner.basb.info</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_form" />
+        <field name="arch" type="xml">
+            <data>
+
+                <xpath expr="//field[@name='company_type']" position="attributes">
+                    <attribute name="attrs">{'invisible': True}</attribute>
+                </xpath>
+                <xpath expr="//field[@name='parent_id']" position="attributes">
+
+                    <attribute name="placeholder"> Your Dependent </attribute>
+                </xpath>
+
+                <xpath expr="//field[@name='parent_id']" position="before">
+                    <field name="personal_number" placeholder="Personal Number"/>
+                </xpath>
+
+                <xpath expr="//field[@name='vat']" position="before">
+                    <field name="permanent_address" placeholder="Permanent Address" />
+                    <field name="date_of_birth" attrs="{'invisible': [('parent_id','=', False)]}" />
+                    <field name="relation_id" placeholder="Relation" attrs="{'invisible': [('parent_id','=', False)]}"/>
+                    <field name="barcode" placeholder="Barcode" />
+                </xpath>
+                <xpath expr="//field[@name='vat']" position="after">
+                    <field name="living_status"/>
+                </xpath>
+
+                <xpath expr="//field[@name='function']" position="replace">
+                    <field name="rank_id"/>
+                    <field name="service"/>
+                    <field name="date_of_retirement"/>
+                    <field name="dasb"/>
+                </xpath>
+
+                <xpath expr="//field[@name='child_ids']//form//sheet//group//field[@name='title']" position="after">
+                    <field name="relation_id" placeholder="Relation" />
+                    <field name="date_of_birth"/>
+                    <field name="national_identification"/>
+                    <field name="barcode" placeholder="Barcode" />
+                    <field name="category_id" string="Chronic Disease" widget='many2many_tags'/>
+                </xpath>
+
+                <xpath expr="//field[@name='child_ids']//form//sheet//group//field[@name='mobile']" position="after">
+                    <field name="living_status"/>
+                </xpath>
+
+                <xpath expr="//field[@name='child_ids']//form//sheet//group//field[@name='function']" position="attributes">
+                    <attribute name="string">Occupation</attribute>
+                </xpath>
+
+                
+                
+            </data>
+        </field>
+    </record>
+
+    <record id="view_partners_for_basb_info_search" model="ir.ui.view">
+        <field name="name">res.partner.search</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_res_partner_filter"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='name']" position="before">
+                <field name="personal_number"/>
+                <field name="barcode"/>
+                <field name="national_identification"/>
+            </xpath>
+        </field>
+    </record>
+
+    
+</odoo>

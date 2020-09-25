@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<templates id="template" xml:space="preserve">
+
+    <t t-name="OTP">
+        <span class="control-button">
+            <i class="fa fa-send"></i>
+            Verify OTP
+        </span>
+    </t>
+
+</templates>

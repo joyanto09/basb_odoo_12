@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+	<record model="report.paperformat" id="paperformat_stock_consumption_report">
+        <field name="name">Stock Consumption Report</field>
+        <field name="default" eval="True"/>
+        <field name="format">A4</field>
+        <field name="page_width">0</field>
+        <field name="page_width">0</field>
+        <field name="orientation">Portrait</field>
+        <field name="margin_top">40</field>
+        <field name="margin_right">7</field>
+        <field name="margin_bottom">28</field>
+        <field name="margin_left">7</field>
+        <field name="header_line" eval="False"/>
+        <field name="header_spacing">35</field>
+        <field name="dpi">90</field>
+    </record>
+	
+    <report
+        id="stock_consumption_report"
+        string="Medicine Delivery Report"
+        model="stock.consumption.wizard"
+        report_type="qweb-html"
+        name="meta_stock_consumption.stock_consumption_report_view"	
+		paperformat="paperformat_stock_consumption_report"	
+        menu="False"/> 
+		
+
+	<template id="stock_consumption_report_view">
+		<t t-call="web.html_container">
+
+			<!-- <div class="container"> 
+			<div class="page">  -->
+
+			<style>
+				.heading {
+					font-weight:bold; 
+				}
+				.border-top-none {
+					border-top: 1px solid #fff !important;
+				}
+				.text-right {
+					text-align: right;
+				}
+				.italic {
+					font-style: italic;
+				}
+				.no-wrap {
+					white-space: nowrap;
+				}
+				tr th {
+					text-align: center !important;
+				}
+				tr th, tr td {
+					vertical-align: middle !important;
+				}
+				.mt10 {
+					margin-top: 10px;
+				}
+				.mb5 {
+					margin-bottom: 5px;
+				}
+				.mb20 {
+					margin-bottom: 20px;
+				}
+			</style>
+
+			<div class="article">
+				<h3 class="text-center heading mt10 mb5">Medicine Delivery Report</h3>
+				<h5 class="text-center mb5">Dispensary: <t t-esc="warehouse_name"/></h5>
+				<h5 class="text-center mb20">Date Range: <t t-esc="date_start_range"/> to <t t-esc="date_end_range"/></h5>
+				<table class="table table-bordered">
+					<thead>
+						<tr>
+							<th style="width: 25%">Product Name</th>
+							<th style="width: 12%">Opening <br/>Qty</th>
+							<th style="width: 15%">Issue Date</th>
+							<th style="width: 12%">Issue <br/>Qty</th>
+							<th style="width: 12%">Adjust <br/>Qty</th>
+							<th style="width: 12%">Delivery <br/>Qty</th>
+							<th style="width: 12%">Balance <br/>Qty</th>
+						</tr>
+					</thead>
+					<tbody>
+
+						<t t-set="track_prod_id" t-value="0"/>
+						<t t-set="track_opening_qty_total" t-value="0"/>
+						<t t-set="track_issue_qty_total" t-value="0"/>
+						<t t-set="track_adjust_qty_total" t-value="0"/>
+						<t t-set="track_consuption_qty_total" t-value="0"/>
+
+						<div t-foreach="docs" t-as="stock">
+
+							<t t-if="stock['product_id']!=track_prod_id and track_prod_id!=0">
+								<tr class="italic">
+									<td>Total</td>
+									<td class="text-right">
+										<t t-set="track_opening_qty_total" t-value="get_opening_qty_total(filter_date_start, track_prod_id, location_id)"/>
+										<t t-esc="int(track_opening_qty_total)"/>
+									</td>
+									<td></td>
+									<td class="text-right">
+										<t t-esc="int(track_issue_qty_total)"/>
+									</td>
+									<td class="text-right">
+										<t t-esc="int(track_adjust_qty_total)"/>
+									</td>
+									<td class="text-right">
+										<t t-esc="int(track_consuption_qty_total)"/>
+									</td>
+									<td class="text-right">
+										<t t-esc="int(track_opening_qty_total+track_issue_qty_total-track_adjust_qty_total-track_consuption_qty_total)"/>
+									</td>
+								</tr>
+								<t t-set="track_opening_qty_total" t-value="0"/>
+								<t t-set="track_issue_qty_total" t-value="0"/>
+								<t t-set="track_adjust_qty_total" t-value="0"/>
+								<t t-set="track_consuption_qty_total" t-value="0"/>
+							</t>
+
+							<tr>
+								<t t-if="stock['product_id'] != track_prod_id">
+									<td>
+										<t t-esc="stock['product_name']"/>
+									</td>
+								</t>
+								<t t-else="">
+									<td></td>
+								</t>
+								<td></td>
+								<td class="no-wrap">
+									<t t-esc="stock['transfer_date']"/>
+								</td>
+								<td class="text-right">
+									<t t-esc="int(stock['issue_qty'])"/>
+								</td>
+								<td class="text-right">
+									<t t-esc="int(stock['adjust_qty'])"/>
+								</td>
+								<td class="text-right">
+									<t t-esc="int(stock['consumption_qty'])"/>
+								</td>
+								<td></td>
+							</tr>
+
+							<t t-set="track_prod_id" t-value="stock['product_id']"/>
+							<t t-set="track_issue_qty_total" t-value="track_issue_qty_total+stock['issue_qty']"/>
+							<t t-set="track_adjust_qty_total" t-value="track_adjust_qty_total+stock['adjust_qty']"/>
+							<t t-set="track_consuption_qty_total" t-value="track_consuption_qty_total+stock['consumption_qty']"/>
+
+						</div>
+
+						<tr class="italic">
+							<td>Total</td>
+							<td class="text-right">
+								<t t-set="track_opening_qty_total" t-value="get_opening_qty_total(filter_date_start, track_prod_id, location_id)"/>
+								<t t-esc="int(track_opening_qty_total)"/>
+							</td>
+							<td></td>
+							<td class="text-right">
+								<t t-esc="int(track_issue_qty_total)"/>
+							</td>
+							<td class="text-right">
+								<t t-esc="int(track_adjust_qty_total)"/>
+							</td>
+							<td class="text-right">
+								<t t-esc="int(track_consuption_qty_total)"/>
+							</td>
+							<td class="text-right">
+								<t t-esc="int(track_opening_qty_total+track_issue_qty_total-track_adjust_qty_total-track_consuption_qty_total)"/>
+							</td>
+						</tr>
+
+					</tbody>
+				</table>
+			</div>
+
+			<!-- </div>
+			</div> -->
+
+		</t>
+	</template>
+
+</odoo>

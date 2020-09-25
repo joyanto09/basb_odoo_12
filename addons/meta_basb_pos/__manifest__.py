@@ -1,0 +1,33 @@
+{
+    'name': 'Order Notes In POS',
+    'summary': """The module enables to add multiple order line from the pos interface and other than
+    selection of the order note text is also enabled""",
+    'version': '12.0.1.0.0',
+    'description': """The module enables to add multiple order line from the pos interface and other than
+    selection of the order note text is also enabled""",
+    'author': 'Metamorphosis Ltd.',
+    'company': 'Metamorphosis Ltd.',
+    'maintainer': 'mamun',
+    'category': 'Point of Sale',
+    'depends': ['base', 'point_of_sale', 'pos_restaurant','product','meta_basb_contacts'],
+    'license': 'AGPL-3',
+    'data': [
+        'views/order_note_templates.xml',
+        'views/res_users.xml',
+        'views/order_note_backend.xml',
+        'views/product_template.xml',
+        'security/ir.model.access.csv',
+        'views/pos_config_settings.xml',
+        'views/pos_order_menu.xml',
+        'views/pos_pivot_view_modified.xml',
+        'views/stock_move_line_modified.xml',
+        'views/point_of_sale_dashboard_modified.xml',
+        'views/pos_config_view.xml',
+    ],
+    'qweb': ['static/src/xml/pos_internal_note.xml'],
+    'images': ['static/description/banner.png'],
+    'installable': True,
+    'auto_install': False,
+    'application': True,
+    'sequence': 1,
+}

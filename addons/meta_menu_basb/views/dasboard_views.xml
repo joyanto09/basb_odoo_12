@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <record id="dashboard_menu_kanban" model="ir.ui.view">
+            <field name="name">basb.dashboard.menu.kanban</field>
+            <field name="model">basb.dashboard.menu</field>
+            <field name="priority" eval="7" />
+            <field name="arch" type="xml">
+                <kanban class="o_kanban_mobile" create='false'>
+                    <field name="name"/>
+                    <field name="header"/>
+                    <templates>
+                        <t t-name="kanban-box">
+                            <div style="width: 30%; height: 143px; background-color: #ffffff;">             
+                                <button style="width: 100%; height: auto; border: none; color: #666; background-color: #fff;" class="btn btn-primary" name="open_ui" type="object">
+                                    <img id="imgName" src="" style="width:80px; height: auto;padding-top: 4px;"/>
+                                    <h4 id="headName" style="line-height: 34px;"><field name="header" align="center"/></h4>
+                                </button>
+                                <script>
+                                    for (i=0; i&lt;$('[id=headName]').length; i++) {
+                                        tag = document.querySelectorAll('#headName')[i]; 
+                                        $(tag).prev().attr("src", "/meta_menu_basb/static/src/img/" + $(tag).text() + ".png");
+                                    }
+                                </script>
+                            </div>
+                        </t>
+                    </templates>
+                </kanban>
+            </field>
+        </record>
+
+
+        <record id="action_dashboard_menu_form" model="ir.actions.act_window">
+            <field name="name">Dashboard</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">basb.dashboard.menu</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">kanban</field>
+            <field name="res_id">1</field>
+            <field name="target">inline</field>
+            <field name="view_id" ref="dashboard_menu_kanban"/>
+        </record>
+
+        <!-- Menu -->
+        <menuitem id="basb_menu_all_modules" name="Home" sequence="1"/>
+        <menuitem id="basb_menu_all_modules_dashboard" name="Dashboard" parent="basb_menu_all_modules" sequence="1"/>
+        <menuitem id="basb_menu_all_modules_dashboard_sub" name="Dashboard" parent="basb_menu_all_modules_dashboard"  action="action_dashboard_menu_form" sequence="1"/>
+        
+
+        <record model="ir.ui.menu" id="mail.menu_root_discuss">
+            <field name='sequence'>100</field>
+        </record>
+
+        <!-- Action -->
+        
+        <menuitem id="basb_menu_all_modules_modules" name="Modules" parent="basb_menu_all_modules"  sequence="2"/> 
+        
+        <record id="action_call_ui" model="ir.actions.server">
+            <field name="name">Call UI</field>
+            <field name="condition">True</field>
+            <field name="type">ir.actions.server</field>
+            <field name="model_id" ref="model_basb_dashboard_menu" />
+            <field name="state">code</field>
+            <field name="code">action = model.open_ui_from_menu('contacts_beneficiary')</field>
+        </record>
+        <menuitem id="basb_menu_all_modules_beneficiaries" name="Beneficiaries" groups="point_of_sale.group_pos_manager" parent="basb_menu_all_modules_modules" action="action_call_ui" sequence='1'/>
+
+        <record id="action_call_ui1" model="ir.actions.server">
+            <field name="name">Call UI</field>
+            <field name="condition">True</field>
+            <field name="type">ir.actions.server</field>
+            <field name="model_id" ref="model_basb_dashboard_menu" />
+            <field name="state">code</field>
+            <field name="code">action = model.open_ui_from_menu('configuration_basb')</field>
+        </record>
+        <menuitem id="basb_menu_all_modules_configuration" name="Configuration" groups="point_of_sale.group_pos_manager" parent="basb_menu_all_modules_modules" action="action_call_ui1" sequence='1'/>
+
+        <record id="action_call_ui2" model="ir.actions.server">
+            <field name="name">Call UI</field>
+            <field name="condition">True</field>
+            <field name="type">ir.actions.server</field>
+            <field name="model_id" ref="model_basb_dashboard_menu" />
+            <field name="state">code</field>
+            <field name="code">action = model.open_ui_from_menu('basb_users')</field>
+        </record>
+        <menuitem id="basb_menu_all_modules_users" name="Users" groups="point_of_sale.group_pos_manager" parent="basb_menu_all_modules_modules" action="action_call_ui2" sequence='1'/>
+
+        <record id="action_call_ui3" model="ir.actions.server">
+            <field name="name">Call UI</field>
+            <field name="condition">True</field>
+            <field name="type">ir.actions.server</field>
+            <field name="model_id" ref="model_basb_dashboard_menu" />
+            <field name="state">code</field>
+            <field name="code">action = model.open_ui_from_menu('pos_medical_dispensary')</field>
+        </record>
+        <menuitem id="basb_menu_all_modules_pos" name="Dispensary" groups="point_of_sale.group_pos_user" parent="basb_menu_all_modules_modules" action="action_call_ui3" sequence='1'/>
+
+        <record id="action_call_ui4" model="ir.actions.server">
+            <field name="name">Call UI</field>
+            <field name="condition">True</field>
+            <field name="type">ir.actions.server</field>
+            <field name="model_id" ref="model_basb_dashboard_menu" />
+            <field name="state">code</field>
+            <!-- <field name="code">action = model.open_ui_from_menu('basb_stock')</field> -->
+            <field name="code">action = stock.quantsact</field>
+        </record>
+        <menuitem id="basb_menu_all_modules_stock" name="Stocks" groups="point_of_sale.group_pos_user" parent="basb_menu_all_modules_modules" action="action_call_ui4" sequence='1'/>
+
+        <record id="action_call_ui5" model="ir.actions.server">
+            <field name="name">Call UI</field>
+            <field name="condition">True</field>
+            <field name="type">ir.actions.server</field>
+            <field name="model_id" ref="model_basb_dashboard_menu" />
+            <field name="state">code</field>
+            <field name="code">action = model.open_ui_from_menu('basb_critical_stock')</field>
+        </record>
+        <menuitem id="basb_menu_all_modules_critical_stock" name="Critical Stock" groups="point_of_sale.group_pos_user" parent="basb_menu_all_modules_modules" action="action_call_ui5" sequence='1'/>
+    
+    </data>
+</odoo>
+
